@@ -1,7 +1,11 @@
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 400,
+    width: 1280,
+    height: 720,
+    scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+   },
     backgroundColor: "#1d1d1d",
 
     // aqui você coloca suas cenas (por enquanto só uma cena vazia)

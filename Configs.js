@@ -15,7 +15,7 @@ class Configs extends Phaser.Scene {
         // todo código inicial da cena vai aqui
         this.cameras.main.fadeIn(800);
         this.add.image(0, 0, 'menubg').setOrigin(0.5, 0)
-        .setScale(2, 2);
+        .setScale(3.3, 3.3);
         this.noiteum = this.add.image(100, 100, 'noiteUm').setScale(0.5, 0.5);
         this.noiteum.setInteractive();
         this.noiteum.on('pointerdown', () => {

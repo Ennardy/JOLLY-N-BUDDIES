@@ -5,6 +5,7 @@ class Menu extends Phaser.Scene {
 
     preload() {
         // carregamento (por enquanto vazio)
+        this.scale.startFullscreen();
        this.load.image('menubg', "sprites/menubg.png");
        this.load.image('playbtn', "sprites/start.png");
     }
@@ -12,8 +13,8 @@ class Menu extends Phaser.Scene {
     create() {
         this.cameras.main.fadeIn(800);
         // todo código inicial da cena vai aqui
-        this.add.image(0, 0, 'menubg').setOrigin(0, 0);
-        this.playbtn = this.add.image(150, 300, 'playbtn').setInteractive()
+        this.add.image(640, 360, 'menubg').setScale(1.8, 1.8);
+        this.playbtn = this.add.image(150, 500, 'playbtn').setInteractive()
         .setScale(0.6, 0.6);
         
         this.playbtn.on('pointerdown', () => {
