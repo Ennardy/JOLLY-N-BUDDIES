@@ -5,7 +5,7 @@ class Configs extends Phaser.Scene {
 
     preload() {
         // carregamento (por enquanto vazio)
-        this.load.image('menubg', "sprites/menubg.png");
+        this.load.image('select', "sprites/select.png");
         this.load.image('noiteUm', "sprites/noiteUm.png");
         
         
@@ -14,8 +14,8 @@ class Configs extends Phaser.Scene {
     create() {
         // todo código inicial da cena vai aqui
         this.cameras.main.fadeIn(800);
-        this.add.image(0, 0, 'menubg').setOrigin(0.5, 0)
-        .setScale(3.3, 3.3);
+        this.add.image(0, 0, 'select').setOrigin(0, 0)
+        .setScale(0.7, 0.7);
         this.noiteum = this.add.image(100, 100, 'noiteUm').setScale(0.5, 0.5);
         this.noiteum.setInteractive();
         this.noiteum.on('pointerdown', () => {
@@ -25,7 +25,7 @@ class Configs extends Phaser.Scene {
           this.noiteum.setScale(0.5, 0.5);
           this.cameras.main.fadeOut(800, 0, 0, 0);
           this.cameras.main.once('camerafadeoutcomplete', () => {
-            // mudar de cena this.scene.start( )
+          this.scene.start("Noiteum")
           });
           this.noiteum.disableInteractive()
         });
