@@ -30,6 +30,7 @@ class Noiteum extends Phaser.Scene {
     }
   
     create(){
+      this.cameras.main.fadeIn(800);
       this.esc = this.add.image(640, 360, 'escritorio');
       this.cam_btn = this.add.image(700, 322, 'cam_btn').setScale(0.15, 0.12);
       this.cams = this.add.sprite(640, 360, 'cam1').setVisible(false);

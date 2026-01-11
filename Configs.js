@@ -5,8 +5,7 @@ class Configs extends Phaser.Scene {
 
     preload() {
         // carregamento (por enquanto vazio)
-        this.load.image('select', "sprites/select.png");
-        this.load.image('noiteUm', "sprites/noiteUm.png");
+        
         
         
     }

@@ -5,10 +5,7 @@ class Menu extends Phaser.Scene {
 
     preload() {
         // carregamento (por enquanto vazio)
-        this.scale.startFullscreen();
-       this.load.image('menubg', "sprites/menubg.png");
-       this.load.image('playbtn', "sprites/start.png");
-       this.load.image('title', "sprites/title.png");
+        
     }
 
     create() {
