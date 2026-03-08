@@ -4,41 +4,56 @@ class Noiteum extends Phaser.Scene {
     }
   
     preload(){
+      this.last_cam = null
       this.cam_ab = false;
       this.cam_esq = false;
       this.cam_dir = true;
-      this.cam_select = 0;
+      this.cam_select = 1;
       this.load.image('escritorio', "sprites/escritorio.png");
       this.load.image('cam_down', "sprites/cam_down.png");
-      //cam anims
-      this.load.image('cam_btn', "sprites/cam_btn.png");
-      this.load.image('ab_cam1', "sprites/camera_anim1.png");
-      this.load.image('ab_cam2', "sprites/camera_anim2.png");
-      this.load.image('ab_cam3', "sprites/camera_anim3.png");
-      this.load.image('ab_cam4', "sprites/camera_anim4.png");
-      this.load.image('ab_cam5', "sprites/camera_anim5.png");
-      this.load.image('ab_cam6', "sprites/camera_anim6.png");
-      //fim cam anims
-      //cams normais
-      this.load.image('cam1', "sprites/cam_1.png");
-      this.load.image('cam2', "sprites/cam_2.png");
-      this.load.image('cam3', "sprites/cam_3.png");
-      this.load.image('cam4', "sprites/cam_4.png");
-      this.load.image('cam5', "sprites/cam_5.png");
-      this.load.image('cam6', "sprites/cam_6.png");
-      this.load.image('mapa', "sprites/mapa.png");
-    }
-  
+      this.min = 0;
+      this.hora = 12;
+      this.txtrel = (this.hora.toString().padStart(2,'0') + ":" + this.min.toString().padStart(2,'0'))
+    }  
     create(){
+      this.IABase();
+      
       this.cameras.main.fadeIn(800);
       this.esc = this.add.image(640, 360, 'escritorio');
       this.cam_btn = this.add.image(700, 322, 'cam_btn').setScale(0.15, 0.12);
       this.cams = this.add.sprite(640, 360, 'cam1').setVisible(false);
+      this.cams.setOrigin(0.5);
+      this.cams.setDisplaySize(1280, 720);
       this.cam_down = this.add.image(640, 640, 'cam_down').setScale(0.3, 0.3)
       .setVisible(false)
       .setInteractive();
+      this.mapa = this.add.image(1000, 410, 'mapa').setScale(0.6, 0.6) 
+      .setVisible(false);
+      this.backdoor = this.add.image(640, 360, "backdoor")
+      .setVisible(false);
+      this.mover = this.add.image(360, 360, "mover")
+      .setVisible(false);
+      
+      this.relogio = this.add.text(50, 50, this.txtrel, {
+        fontFamily:"dsttf",
+        fontSize: "55px",
+        color: "#00FF00",
+      });
+      
+      for (let i = 1; i <= 14; i++) {
+  this['cb' + i] = this.add.image(1000, 410, 'camsbtn' + i)
+    .setScale(0.6)
+    .setInteractive({ pixelPerfect: true })
+    .setVisible(false);
+
+  this['cb' + i].on('pointerdown', () => {
+    this.cam_select = i;
+  });
+}
+      
       this.cam_btn.setInteractive();
-      this.input.on('pointerdown', (pointer) => {
+      this.esc.setInteractive();
+      this.esc.on('pointerdown', (pointer) => {
         if (pointer.x <= 220) {
           this.cam_esq = true;
           this.cam_dir = false;
@@ -80,20 +95,38 @@ class Noiteum extends Phaser.Scene {
         repeat: 0
       });
       this.cam_btn.on("pointerdown", () => {
+        
         if (this.cam_anim) {
           this.cam_anim.destroy();
         }
+        this.cam_btn.disableInteractive();
         this.cam_anim = this.add.sprite(640, 360, 'ab_cam1').setScale(0.68, 0.68);
         this.cam_anim.play('abrir_cam');
         this.cam_ab = true;
+        
         this.cam_anim.on('animationcomplete', (anim, frame) => {
            if (anim.key === 'abrir_cam') {
              this.cam_anim.destroy();
              this.cams.setVisible(true);
-             this.mapa = this.add.image(1000, 410, 'mapa').setScale(0.6, 0.6);
+             
+             this.mapa.setVisible(true);
+             this.cb1.setVisible(true);
+             this.cb2.setVisible(true);
+             this.cb3.setVisible(true);
+             this.cb4.setVisible(true);
+             this.cb5.setVisible(true);
+             this.cb6.setVisible(true);
+             this.cb7.setVisible(true);
+             this.cb8.setVisible(true);
+             this.cb9.setVisible(true);
+             this.cb10.setVisible(true);
+             this.cb11.setVisible(true);
+             this.cb12.setVisible(true);
+             this.cb13.setVisible(true);
+             this.cb14.setVisible(true);
              this.cam_down.setVisible(true);
            // terminou essa anim
-      }
+      };
        });
         
         
@@ -103,26 +136,58 @@ class Noiteum extends Phaser.Scene {
         this.mapa.setVisible(false);
         this.cams.setVisible(false);
         this.cam_down.setVisible(false);
+        this.cb1.setVisible(false);
+        this.cb2.setVisible(false); 
+        this.cb3.setVisible(false);
+        this.cb4.setVisible(false);
+        this.cb5.setVisible(false);
+        this.cb6.setVisible(false);
+        this.cb7.setVisible(false);
+        this.cb8.setVisible(false); 
+        this.cb9.setVisible(false);
+        this.cb10.setVisible(false);
+        this.cb11.setVisible(false);
+        this.cb12.setVisible(false);
+        this.cb13.setVisible(false);
+        this.cb14.setVisible(false);
+        
         this.cam_anim = this.add.sprite(640, 360, 'ab_cam1').setScale(0.68, 0.68);
         this.cam_anim.play('fechar_cam');
+        
         this.cam_anim.on('animationcomplete', (anim, frame) => {
           if (anim.key === 'fechar_cam'){
             this.cam_anim.destroy();
+            this.cam_btn.setInteractive();
           }
           
-        });
+        }); 
+        
       });
       //fim cam anim
       //cams 
       
-      
     }
   
-    update(){
+  update(time, delta){
+  this.min += delta / 1000; 
+
+  if (this.min >= 60) {
+   this.hora += 1;
+    this.min = 0;
+  }
+
+  if (this.hora >= 13) {
+    this.hora = 1;
+  }
+
+  this.txtrel = this.hora.toString().padStart(2,'0') + ":" + Math.floor(this.min).toString().padStart(2,'0');
+
+  this.relogio.setText(this.txtrel);
     if (this.cam_esq){
       if (this.esc.x <= 950 && this.cam_dir == false){
         this.esc.x += 11; 
         this.cam_btn.x += 11;
+        
       }
     } 
     if (this.cam_dir){
@@ -132,9 +197,103 @@ class Noiteum extends Phaser.Scene {
       }
     }
     
-    if (this.cams && this.cams.visible){
-      this.cams.setTexture('cam' + (this.cam_select + 1));
-    }
+    if (this.cams.visible){
+        switch(this.cam_select){
+          case this.Jcam:
+            if(this.Janim == 0){
+            this.cams.setTexture('Jolly' + this.cam_select);
+            this.last_cam = this.cam_select;
+            
+            } else {
+              this.cams.setTexture('Jolly' + this.cam_select + "_" + this.Janim);
+              this.last_cam = this.cam_select;
+            }
+            break;
+          
+          default:
+            this.cams.setTexture('cam' + this.cam_select);
+            this.last_cam = this.cam_select;
+        }
+      }
     
+    
+    this.IAt += delta;
+    if (this.IAt >= this.IAtimer){
+      this.action = Phaser.Math.Between(0, 10);
+      
+      this.reload();
+      console.log("tic tac");
+      this.IAt = 0;
     }
+ }
+
+
+IABase(){
+  this.IAtimer = 10000
+  this.IAt = 0;
+  this.action = 0;
+  this.jolly = 2;
+  this.Janim = 1;
+  this.Jpath = false;
+  this.Jcam = 2;
+  this.yum = 3;
+  this.Ypath = false;
+  this.Yanim = 0;
+  
+ }
+ reload(){
+    switch (true){
+      case (this.action <= this.jolly):
+        this.Jpath = true;
+        console.log("j");
+        break;
+      case (this.action <= this.yum):
+        this.Ypath = true;
+        break;
+      default:
+      break;
+    }
+    if (this.Jpath == true){
+      switch (true){
+        
+        case (this.Jcam == 2 && this.Janim == 1):
+          this.Jcam = 2;
+          this.Janim = 2;
+          this.Jpath = false;
+          break
+        case (this.Jcam == 2 && this.Janim == 2):
+          this.Jcam = 2; 
+          this.Janim = 3;
+          this.Jpath = false;
+          break
+        case (this.Jcam == 2 && this.Janim == 3):
+          this.Jcam = 5; 
+          this.Janim = 0;
+          this.Jpath = false;
+          break
+        case ( this.Jcam == 5 && this.Janim == 0):
+          this.Jcam = 7; 
+          this.Janim = 1;
+          this.Jpath = false;
+          break
+        case ( this.Jcam == 7 && this.Janim == 1):
+          this.Jcam = 7; 
+          this.Janim = 2;
+          this.Jpath = false;
+          break
+        case ( this.Jcam == 7 && this.Janim == 2):
+          this.Jcam = 8; 
+          this.Janim = 1;
+          this.Jpath = false;
+          break
+          case ( this.Jcam == 8 && this.Janim == 1):
+            this.Jcam = 8; 
+            this.Janim = 2;
+            this.Jpath = false;
+          break
+          default:
+            break;
+      }
+    }
+  }
 }

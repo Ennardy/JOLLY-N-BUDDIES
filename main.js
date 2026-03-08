@@ -1,5 +1,5 @@
 const config = {
-    type: Phaser.CANVAS,
+    type: Phaser.WEBGL,
     width: 1280,
     height: 720,
     scale: {
@@ -11,6 +11,7 @@ const config = {
     // aqui você coloca suas cenas (por enquanto só uma cena vazia)
     scene: [
       Loading,
+      Intro,
       Menu,
       Configs,
       Noiteum

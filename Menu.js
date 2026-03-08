@@ -11,8 +11,8 @@ class Menu extends Phaser.Scene {
     create() {
         this.cameras.main.fadeIn(800);
         // todo código inicial da cena vai aqui
-        this.add.image(640, 360, 'menubg').setScale(2, 2);
-        this.add.image(300, 0, 'title').setOrigin(0.1, 0.1)
+        this.add.image(640, 360, 'menubg').setScale(0.7, 0.7);
+        this.add.image(450, 0, 'title').setOrigin(0.1, 0.1)
         .setScale(0.4, 0.4);
         this.playbtn = this.add.image(150, 500, 'playbtn').setInteractive()
         .setScale(0.6, 0.6);
