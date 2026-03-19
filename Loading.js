@@ -73,16 +73,15 @@ class Loading extends Phaser.Scene{
       this.load.image("Jolly8_2", "sprites/jolly_cam8_2.png");
       // backdoor 
       this.load.image("backdoor", "sprites/backdoor.png");
-      this.load.image("backdoor", "sprites/backdoor.png");
       this.load.image("backdoor2", "sprites/backdoor2.png");
-      this.load.image("mover1", "sprites/mover1");
-      this.load.image("mover2", "sprites/mover2");
+      this.load.image("mover1", "sprites/mover1.png");
+      this.load.image("mover2", "sprites/mover2.png");
       
   }
   
   create(){
     
-    this.scene.start("Menu");
+    this.scene.start("Noiteum");
     
     
     

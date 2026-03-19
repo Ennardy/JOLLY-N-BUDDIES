@@ -20,6 +20,10 @@ class Noiteum extends Phaser.Scene {
       
       this.cameras.main.fadeIn(800);
       this.esc = this.add.image(640, 360, 'escritorio');
+      this.mover = this.add.image(40, 280, "mover1")
+      .setVisible(false)
+      .setInteractive();
+      this.mover.setScale(0.35, 0.35);
       this.cam_btn = this.add.image(700, 322, 'cam_btn').setScale(0.15, 0.12);
       this.cams = this.add.sprite(640, 360, 'cam1').setVisible(false);
       this.cams.setOrigin(0.5);
@@ -31,8 +35,13 @@ class Noiteum extends Phaser.Scene {
       .setVisible(false);
       this.backdoor = this.add.image(640, 360, "backdoor")
       .setVisible(false);
-      this.mover = this.add.image(360, 360, "mover")
-      .setVisible(false);
+      this.backdoor.setScale(0.7, 0.7);
+      
+      this.moverdois = this.add.image(1100, 360, "mover2")
+      .setInteractive();
+      this.moverdois.setScale(0.3, 0.3)
+      this.moverdois.setVisible(false);
+      
       
       this.relogio = this.add.text(50, 50, this.txtrel, {
         fontFamily:"dsttf",
@@ -131,6 +140,18 @@ class Noiteum extends Phaser.Scene {
         
         
       });
+      this.mover.on('pointerdown', () => {
+        this.cameras.main.fadeOut(500);
+        this.backdoor.setVisible(true);
+        this.moverdois.setVisible(true);
+        this.cameras.main.fadeIn(500);
+      });
+      this.moverdois.on('pointerdown', () => {
+        this.cameras.main.fadeOut(500);
+        this.backdoor.setVisible(false);
+        this.moverdois.setVisible(false);
+        this.cameras.main.fadeIn(500);
+      });
       this.cam_down.on('pointerdown', () => {
         
         this.mapa.setVisible(false);
@@ -165,7 +186,7 @@ class Noiteum extends Phaser.Scene {
       });
       //fim cam anim
       //cams 
-      
+
     }
   
   update(time, delta){
@@ -187,13 +208,16 @@ class Noiteum extends Phaser.Scene {
       if (this.esc.x <= 950 && this.cam_dir == false){
         this.esc.x += 11; 
         this.cam_btn.x += 11;
-        
+        this.mover.setVisible(true);
+        this.mover.x += 11;
       }
     } 
     if (this.cam_dir){
       if (this.esc.x >= 640 && this.cam_esq == false){
         this.esc.x -= 11;
         this.cam_btn.x -= 11;
+        this.mover.setVisible(false);
+        this.mover.x -= 11;
       }
     }
     
