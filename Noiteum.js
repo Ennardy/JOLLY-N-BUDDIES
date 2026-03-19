@@ -62,7 +62,7 @@ class Noiteum extends Phaser.Scene {
       
       this.cam_btn.setInteractive();
       this.esc.setInteractive();
-      this.esc.on('pointerdown', (pointer) => {
+      this.esc.on('pointermove', (pointer) => {
         if (pointer.x <= 220) {
           this.cam_esq = true;
           this.cam_dir = false;
